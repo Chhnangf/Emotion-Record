@@ -17,9 +17,14 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import emotion_record.composeapp.generated.resources.Res
 import emotion_record.composeapp.generated.resources.compose_multiplatform
 
+import org.koin.core.context.KoinContext
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
+
 @Composable
 @Preview
 fun App() {
+
     MaterialTheme {
         Navigator(HomeScreen())
 

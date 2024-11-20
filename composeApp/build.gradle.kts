@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -7,6 +6,11 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.room)
+    alias(libs.plugins.ksp)
+}
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 kotlin {
@@ -29,10 +33,11 @@ kotlin {
     }
     
     sourceSets {
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -43,6 +48,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+
 
             // Voyager navigator
             implementation(libs.voyager.koin)
@@ -63,6 +69,15 @@ kotlin {
             implementation(libs.kotlinx.datetime)
 
             implementation(libs.flexible.bottomsheet)
+
+            // Room
+            implementation(libs.room.runtime)
+            implementation(libs.sqlite.bundled)
+
+            //Koin
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+
         }
     }
 }
@@ -97,4 +112,6 @@ android {
 dependencies {
     debugImplementation(compose.uiTooling)
 }
+
+
 
